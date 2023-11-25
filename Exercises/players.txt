@@ -1,0 +1,4 @@
+ofer=5
+tanya=10
+shay=1
+boris=200
