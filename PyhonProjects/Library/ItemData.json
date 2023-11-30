@@ -1,0 +1,38 @@
+{
+    "1": {
+        "type": "book",
+        "details": {
+            "title": "w",
+            "author": "w"
+        }
+    },
+    "2": {
+        "type": "book",
+        "details": {
+            "title": "e",
+            "author": "e"
+        }
+    },
+    "3": {
+        "type": "customer",
+        "details": {
+            "1": "t",
+            "2": "t"
+        }
+    },
+    "5": {
+        "type": "book",
+        "details": {
+            "title": "t",
+            "author": "t"
+        }
+    },
+    "7": {
+        "type": "employee",
+        "details": {}
+    },
+    "6": {
+        "type": "employee",
+        "details": {}
+    }
+}
