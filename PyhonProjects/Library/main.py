@@ -1,17 +1,19 @@
 import json
 import LibraryClass as lc
-with open(lc.DataItem.file_name, "r") as openfile:
-    item_list = json.load(openfile)
-with open(lc.Storage.transactions, "r") as openfile:
-    transactions = json.load(openfile)
-# with open(lc.Storage.stock, "r") as openfile:
-#     stock = json.load(openfile)
+
+project_assignment = [
+"Add a new customer", 
+"Add a new book", 
+"Loan a book", 
+"Return a book", 
+"Display all books", 
+"Display all customers", 
+"Display all loans", 
+"Display late loans", 
+"Find book by name", 
+"Find customer by name", 
+"Remove book", 
+"Remover customer"]
 
 
-
-x = lc.Storage()
-x.print_data()
-print(x.stock_info("000024"))
-
-x.transaction("000024", "000001", "000004", 1)
-x.print_data()
+lc.Storage.display_options(project_assignment)

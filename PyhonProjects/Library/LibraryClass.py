@@ -8,44 +8,109 @@ class DataItem():
     # This can be changed and there is a function that will update the old data to the updated format.
     item_info = ["type", "details", "location", "value"]
     details_list = {
-                "book": ["title", "author", "genre", "language", "publication year"],
+                "book": ["title", "author", "genre", "language", "publication year", "class"],
                 "customer": ["family", "first", "address"],
                 "employee": [],
                 "library": ["title", "address"]
                 }
     file_name = "ItemData.json"
     serial_length = 6
+    class_restrict = {"1": 10, "2": 5, "3": 2}
     
     def __init__(self):
-        pass
+        with open(self.file_name, "r") as openfile:
+            self.item_data = json.load(openfile)
     
-    @classmethod
-    def new_item(cls, item_type: str, serial: str):
-        cls.item_type = item_type
-        if len(serial) > DataItem.serial_length:
-            raise PermissionError ("Serial number exceeds allowed number of digits")  
+    def update_list(self, new_dict: dict) -> json:
+        """Update item data list"""
+        with open(self.item_data, 'w') as outfile:
+            json.dump(new_dict, outfile, sort_keys= True, indent= 4)
+        
+        
+    def next_serial(self) -> list:
+        """Calculates current max. serial number and the next serial number one for new items"""
+        serial_list = self.item_data.keys()
+        self.max_serial = max(serial_list)
+        self.next_ser = str(int(self.max_serial) + 1).zfill(self.serial_length)
+        return [self.max_serial, self.next_ser]
+        
+    def average_value(self, item_type: str) -> str:
+        """Calculate average value for an item type"""
+        round_digit = 4
+        average_val = 0
+        count_item = 0
+        for i in self.item_data:
+            if self.item_data[i]["type"] == item_type:
+                if self.item_data[i]["value"]:
+                    average_val = average_val + float(self.item_data[i]["value"])
+                    count_item += 1
+        self.average_val = str(round(average_val / count_item, round_digit))
+        return self.average_val
+                    
+    
+    
+    def default(self, item_type: str, item_key: str, details: str):
+        """Checks which details are "must" and/or create default"""
+        data = ""
+        if item_type == "customer":
+            if item_key == "location": data = "address"
+            elif item_key == "value": data = ""
+            elif item_key == "details": data = "retry"
+        elif item_type == "book":
+            if item_key == "location": data = ""
+            elif item_key == "value": data = self.average_value("book")
+            elif item_key == "details":
+                if details == "class": data = str(self.class_restrict["1"])
+                else: data = "retry"
         else:
-            serial = (DataItem.serial_length- len(serial)) * "0" + serial   
-        cls.serial = serial
+            pass
+        self.data = data
+        return self.data
+               
+        
+    
+    def new_item(self, item_type: str) -> dict:
+        """Input new item information"""
+        serial = self.next_serial()[1]
         item_list = {}
-        cls.details_list = DataItem.details_list
         info_keys = dict.fromkeys(DataItem.item_info)
-        info_keys["details"] = dict.fromkeys(DataItem.details_list[cls.item_type])
+        info_keys["details"] = dict.fromkeys(DataItem.details_list[item_type])
         info_keys["type"] = item_type
-        info_keys["restrictions"] = dict.fromkeys(DataItem.restrictions[cls.item_type])        
-        print(f"Starting item number: {cls.serial} | of type: {cls.item_type}")
-        for info in info_keys.keys():
-            if info == "type":
+        print(f"Starting item number: {serial} | of type: {item_type} =>")
+        
+        for key in info_keys.keys():
+            # print(info_keys[key])
+            if key == "type":
+                item_list.update({"type": item_type})
                 continue
-            if info_keys[info]:
-                for specific in info_keys[info]:
-                        info_keys[info][specific] = input(f"{info}: {specific}: ")
-                continue
+            if info_keys[key]:
+                detail_data = {}
+                for detail in info_keys[key].keys():
+                    data = "retry"
+                    while data == "retry":
+                        data = input(f"{key} | {detail}: ")
+                        print("data", data, "detail", detail)
+                        if data == "": 
+                            data = self.default(item_type, key, detail)
+                            print(data)
+                            if data == "retry": 
+                                print("Sorry, data is compulsory")
+                    detail_data.update({detail: data})
+                item_list.update({key: detail_data})
             else:
-                info_keys[info] = input(f"{info}: ")
+                data = "retry"
+                while data == "retry":
+                    data = input(f"{key}: ")
+                    if data == "": 
+                        data = self.default(item_type, key, detail)
+                        if data == "retry": 
+                            print("Sorry, data is compulsory")
+            item_list.update({key: data})
+        self.item_data[serial] = item_list
+        print(item_list)
+        # self.update_list(self.item_data)
           
-        item_list[cls.serial] = info_keys
-        return item_list
+        
     
 class Storage():
     """A class to store all storage information"""
@@ -65,20 +130,20 @@ class Storage():
     def print_data(self):
         print(self.stock_data)
     
-    @staticmethod
-    def item_format():
-        return Storage.trans_info
+    # @staticmethod
+    # def item_format():
+    #     return Storage.trans_info
     
     @classmethod
-    def display_options(cls, options:list): 
+    def display_options(cls, options:list, ending = "\n"): 
         i = 0
         for choice in options:
             i += 1
-            print(str(i), end = ".")
+            print(str(i), end = ") ")
             if i < len(options) :
-                print(choice.title(), end= " / ")
+                print(choice.title(), end= ending)
             else:
-                print(choice, end= "")
+                print(choice.title(), end= "")
         my_choice = input(" : choice? ")
         if my_choice.lower() in options:
             pass
