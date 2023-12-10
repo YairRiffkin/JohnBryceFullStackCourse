@@ -1,0 +1,34 @@
+{
+    "10-12-2023 11:00:55": {
+        "input": {
+            "bin": "1R - 1:1",
+            "quantity": 1,
+            "serial": "000024",
+            "storage": "000001",
+            "value": 80.0
+        },
+        "output": {
+            "bin": "self",
+            "quantity": -1,
+            "serial": "000024",
+            "storage": "000004",
+            "value": -80.0
+        }
+    },
+    "10-12-2023 11:01:22": {
+        "input": {
+            "bin": "self",
+            "quantity": 1,
+            "serial": "000024",
+            "storage": "000004",
+            "value": 80.0
+        },
+        "output": {
+            "bin": "1R - 1:1",
+            "quantity": -1,
+            "serial": "000024",
+            "storage": "000001",
+            "value": -80.0
+        }
+    }
+}

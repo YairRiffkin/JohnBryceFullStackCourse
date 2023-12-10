@@ -1,42 +1,23 @@
 import json
 import functools
+import datetime
 
 class DataItem():
     """A class to define all attributes of a data item"""
     # Defining the structure of the data item.
     # This can be changed and there is a function that will update the old data to the updated format.
-    item_info = ["type", "details", "location", "value", "restrictions"]
+    item_info = ["type", "details", "location", "value"]
     details_list = {
                 "book": ["title", "author", "genre", "language", "publication year"],
-                "customer": [],
+                "customer": ["family", "first", "address"],
                 "employee": [],
-                "library": ["address", "book total",	"popular", "employees"]
-                }
-    restrictions = {
-                "book": [],
-                "customer": [],
-                "employee": [],
-                "library": []
+                "library": ["title", "address"]
                 }
     file_name = "ItemData.json"
     serial_length = 6
     
     def __init__(self):
         pass
-    
-    @staticmethod
-    def item_format():
-        return DataItem.details_list.keys()
-    
-    @staticmethod
-    @functools.cache
-    def last():
-        file_name = DataItem.file_name
-        item_list = {}
-        with open(file_name, "r+") as openfile:
-            item_list = json.load(openfile)
-        serial_num = ([int(i) for i in item_list.keys()])
-        return  str(max(serial_num))
     
     @classmethod
     def new_item(cls, item_type: str, serial: str):
@@ -68,42 +49,102 @@ class DataItem():
     
 class Storage():
     """A class to store all storage information"""
-    # Defining the structure of the data item.
-    # This can be changed and there is a function that will update the old data to the updated format.
-    trans_info = ["serial", "type", "time_stamp", "item", "stor_loc", "action"]
-    stock_info = ["item", "stor_item", "stor_loc", "quantity", "value"]
+    trans_info = ["type", "time_stamp", "item", "stor_loc", "action"]
+    stock_info = ["stor_item", "stor_loc", "quantity", "value"]
 
     transactions = "StorageData.json"
     stock = "StockData.json"
     serial_length = DataItem.serial_length
     
     def __init__(self):
-        pass
+        with open(self.stock, "r") as openfile:
+            self.stock_data = json.load(openfile)
+        with open(self.transactions, "r") as openfile:
+            self.storage_data = json.load(openfile)
+            
+    def print_data(self):
+        print(self.stock_data)
     
     @staticmethod
     def item_format():
         return Storage.trans_info
     
-    @functools.cache
-    def current_loc(item):
-        file_name = Storage.stock
-        item_list = {}
-        with open(file_name, "r+") as openfile:
-            item_list = json.load(openfile)
-        serial_num = ([int(i) for i in item_list.keys()])
-        return  str(max(serial_num))
-        
-    
     @classmethod
-    def transaction(cls, store_id: str, item_id: str, receive: str):
-        cls.store_id = store_id
-        cls.item_id = item_id
-        cls.receive = receive
+    def display_options(cls, options:list): 
+        i = 0
+        for choice in options:
+            i += 1
+            print(str(i), end = ".")
+            if i < len(options) :
+                print(choice.title(), end= " / ")
+            else:
+                print(choice, end= "")
+        my_choice = input(" : choice? ")
+        if my_choice.lower() in options:
+            pass
+        if my_choice.isdigit():
+            if int(my_choice) > 0 and int(my_choice) <= i:
+                my_choice = options[int(my_choice) - 1]
+        elif my_choice:
+            print("Incorrect input. Try again.")
+        return my_choice    
         
-        transaction = {}
-        cls.details_list = Storage.item_info
+    def stock_info(self, item_id: str) -> dict:
+        stor_info = {}
+        stor_loc = self.stock_data[item_id].keys()
+        for loc in stor_loc:
+            locations = list(self.stock_data[item_id][loc].keys())
+            stor_info.update({loc: locations})   
+        return stor_info
+    
+    
+    def transaction(self, item_id: str, source: str, dest: str, quantity:float) -> dict:
+        # get location and quantity information of item
+        stor_info = self.stock_info(item_id)
+        if len(stor_info[source]) == 1:
+            loc = stor_info[source][0]
+        else:
+            #if item is in more than 1 location at source -> choose the location.
+            print("Choose source location")
+            loc = self.display_options(stor_info[source])
+        # get item quantity at source
+        source_quantity = float(self.stock_data[item_id][source][loc][0])
+        source_value = float(self.stock_data[item_id][source][loc][1])
+        unit_source_value = source_value / source_quantity
+        source_quantity = source_quantity - quantity # Deduct transfer from source
+        source_value = source_value - unit_source_value * quantity
+        print("Choose destination location")
+        options = stor_info[dest]
+        options.append("New")
+        print(options, type(options))
+        dest_loc = self.display_options(options)
+        if dest_loc.lower() == "new":
+            dest_loc = input("Type new location name: ")
+            self.stock_data[item_id][dest][dest_loc] = ["0", "0"]
+        dest_quantity = float(self.stock_data[item_id][dest][dest_loc][0])
+        dest_value = float(self.stock_data[item_id][dest][dest_loc][1])
+        dest_quantity = dest_quantity + quantity
+        dest_value = dest_value + unit_source_value * quantity
+        # Register change in stock situation
+        self.stock_data[item_id][source][loc]=[str(source_quantity), str(source_value)]
+        self.stock_data[item_id][dest][dest_loc]=[str(dest_quantity), str(dest_value)]
+        time_stamp = datetime.datetime.now()
+        # register transactions in storage data file
+        # time stamp is the identifier
+        time_stamp = time_stamp.strftime("%d-%m-%Y %X")
+        outgoing = {"serial": item_id, "storage": source, "bin": loc, "quantity": -1 * quantity, "value": -1 * unit_source_value * quantity}
+        ingoing = {"serial": item_id, "storage": dest, "bin": dest_loc, "quantity": quantity, "value": unit_source_value * quantity}
+        transaction = {"output": outgoing, "input": ingoing}
+        self.storage_data[time_stamp] = transaction
+        with open(self.stock, 'w') as outfile:
+            json.dump(self.stock_data, outfile, sort_keys= True, indent= 4)
+        with open(self.transactions, 'w') as outfile:
+            json.dump(self.storage_data, outfile, sort_keys= True, indent= 4)
+        
+        
+        
+       
 
           
-        item_list[self.serial] = info_keys
-        return item_list        
+           
 

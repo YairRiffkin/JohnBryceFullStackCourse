@@ -1,38 +1,647 @@
 {
-    "1": {
-        "type": "book",
-        "details": {
-            "title": "w",
-            "author": "w"
-        }
+    "000001": {
+        "details": [
+            "City Library ",
+            "Shivat Zion Street\u200e\u00a0 12, Haifa"
+        ],
+        "location": "address",
+        "type": "library",
+        "value": ""
     },
-    "2": {
-        "type": "book",
-        "details": {
-            "title": "e",
-            "author": "e"
-        }
+    "000002": {
+        "details": [
+            "City Library ",
+            "Sirkin street 14, Kiryat Yam"
+        ],
+        "location": "address",
+        "type": "library",
+        "value": ""
     },
-    "3": {
+    "000003": {
+        "details": [
+            "City Library ",
+            "Yefe Nof street\u200e\u00a0 9, Tirat Hacarmel "
+        ],
+        "location": "address",
+        "type": "library",
+        "value": ""
+    },
+    "000004": {
+        "details": [
+            "Benson",
+            "Kyla",
+            "Ahad Ha'am Street 5/22, Haifa"
+        ],
+        "location": "address",
         "type": "customer",
-        "details": {
-            "1": "t",
-            "2": "t"
-        }
+        "value": ""
     },
-    "5": {
+    "000005": {
+        "details": [
+            "Singh",
+            "Stacey",
+            "Arlozorov Street 3/32,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000006": {
+        "details": [
+            "Townsend",
+            "Miah",
+            "Ben Gurion Avenue 8/40,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000007": {
+        "details": [
+            "Gallegos",
+            "Lucie",
+            "Ha'Atzma'ut Street\u200e\u00a0 12/56,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000008": {
+        "details": [
+            "Gilbert",
+            "Alisha",
+            "HaHagana Street 11/34,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000009": {
+        "details": [
+            "Klein",
+            "Kayleigh",
+            "HaNadiv Avenue\u200e\u00a0 5/18,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000010": {
+        "details": [
+            "Rosales",
+            "Haris",
+            "HaNamal Street\u200e\u00a0 8/33,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000011": {
+        "details": [
+            "Montes",
+            "Ronan",
+            "Haneviim Street 13/33,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000012": {
+        "details": [
+            "Crane",
+            "Carolyn",
+            "Hassan Shukri Street\u200e\u00a0 11/48,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000013": {
+        "details": [
+            "Goodman",
+            "Matteo",
+            "HaZevi Avenue\u200e\u00a0 13/41,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000014": {
+        "details": [
+            "O'Brien",
+            "Anas",
+            "HaZiyonut Avenue\u200e\u00a0 9/15,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000015": {
+        "details": [
+            "Howell",
+            "Levi",
+            "Herzl Street 5/35,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000016": {
+        "details": [
+            "Thomson",
+            "Amanda",
+            "Jaffa Street 5/1,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000017": {
+        "details": [
+            "Fischer",
+            "Roseanna",
+            "Jerusalem Street 13/32,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000018": {
+        "details": [
+            "Le",
+            "Krishan",
+            "Yitzhak Avenue\u200e\u00a0 10/39, Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000019": {
+        "details": [
+            "Carter",
+            "Cynthia",
+            "Louis Promenade\u200e\u00a0 4/58,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000020": {
+        "details": [
+            "Barker",
+            "Woody",
+            "Maale Hashihrur Street\u200e\u00a0 3/60,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000021": {
+        "details": [
+            "Villegas",
+            "Henrietta",
+            "Masada Street 7/39,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000022": {
+        "details": [
+            "Bowers",
+            "Ruairi",
+            "Nathanson Street\u200e\u00a0 3/38,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000023": {
+        "details": [
+            "Pennington",
+            "Dewey",
+            "Sderot haNassi 3/32,  Haifa"
+        ],
+        "location": "address",
+        "type": "customer",
+        "value": ""
+    },
+    "000024": {
+        "details": [
+            "Don Quixote",
+            "Miguel de Cervantes",
+            "Action & Advetnure",
+            "English",
+            "1983"
+        ],
         "type": "book",
-        "details": {
-            "title": "t",
-            "author": "t"
-        }
+        "value": "80"
     },
-    "7": {
-        "type": "employee",
-        "details": {}
+    "000025": {
+        "details": [
+            "The Adventures of Huckleberry Finn",
+            "Mark Twain",
+            "Action & Advetnure",
+            "English",
+            "1990"
+        ],
+        "type": "book",
+        "value": "82"
     },
-    "6": {
-        "type": "employee",
-        "details": {}
+    "000026": {
+        "details": [
+            "The Adventures of Tom Sawyer",
+            "Mark Twain",
+            "Action & Advetnure",
+            "English",
+            "1950"
+        ],
+        "type": "book",
+        "value": "113"
+    },
+    "000027": {
+        "details": [
+            "Treasure Island",
+            "Robert Louis Stevenson",
+            "Action & Advetnure",
+            "English",
+            "2010"
+        ],
+        "type": "book",
+        "value": "119"
+    },
+    "000028": {
+        "details": [
+            "The Call of the Wild",
+            "Jack London",
+            "Action & Advetnure",
+            "English",
+            "2009"
+        ],
+        "type": "book",
+        "value": "85"
+    },
+    "000029": {
+        "details": [
+            "White Fang",
+            "Jack London",
+            "Action & Advetnure",
+            "English",
+            "1943"
+        ],
+        "type": "book",
+        "value": "82"
+    },
+    "000030": {
+        "details": [
+            "Kim",
+            "Rudyard Kipling",
+            "Action & Advetnure",
+            "English",
+            "1854"
+        ],
+        "type": "book",
+        "value": "114"
+    },
+    "000031": {
+        "details": [
+            "Around the World in Eighty Days",
+            "Jules Verne",
+            "Action & Advetnure",
+            "English",
+            "1890"
+        ],
+        "type": "book",
+        "value": "81"
+    },
+    "000032": {
+        "details": [
+            "Robinson Crusoe",
+            "Daniel Defoe",
+            "Action & Advetnure",
+            "English",
+            "1880"
+        ],
+        "type": "book",
+        "value": "78"
+    },
+    "000033": {
+        "details": [
+            "Hatchet",
+            "Gary Paulsen",
+            "Action & Advetnure",
+            "English",
+            "1960"
+        ],
+        "type": "book",
+        "value": "98"
+    },
+    "000034": {
+        "details": [
+            "On the Road",
+            "Jack Kerouac",
+            "Autobiographical",
+            "English",
+            "1983"
+        ],
+        "type": "book",
+        "value": "106"
+    },
+    "000035": {
+        "details": [
+            "The Sorrows of Young Werther",
+            "Johann Wolfgang von Goethe",
+            "Autobiographical",
+            "English",
+            "1990"
+        ],
+        "type": "book",
+        "value": "102"
+    },
+    "000036": {
+        "details": [
+            "Remembrance of Things Past",
+            "Marcel Proust",
+            "Autobiographical",
+            "English",
+            "1950"
+        ],
+        "type": "book",
+        "value": "75"
+    },
+    "000037": {
+        "details": [
+            "Little House on the Prairie",
+            "Laura Ingalls Wilder",
+            "Autobiographical",
+            "English",
+            "2010"
+        ],
+        "type": "book",
+        "value": "95"
+    },
+    "000038": {
+        "details": [
+            "Swann's Way",
+            "Marcel Proust",
+            "Autobiographical",
+            "English",
+            "2009"
+        ],
+        "type": "book",
+        "value": "100"
+    },
+    "000039": {
+        "details": [
+            "On the Banks of Plum Creek",
+            "Laura Ingalls Wilder",
+            "Autobiographical",
+            "English",
+            "1943"
+        ],
+        "type": "book",
+        "value": "105"
+    },
+    "000040": {
+        "details": [
+            "The Long Winter",
+            "Laura Ingalls Wilder",
+            "Autobiographical",
+            "English",
+            "1854"
+        ],
+        "type": "book",
+        "value": "103"
+    },
+    "000041": {
+        "details": [
+            "By the Shores of Silver Lake",
+            "Laura Ingalls Wilder",
+            "Autobiographical",
+            "English",
+            "1890"
+        ],
+        "type": "book",
+        "value": "96"
+    },
+    "000042": {
+        "details": [
+            "Alice's Adventures in Wonderland",
+            "Lewis Carroll",
+            "Fantasy",
+            "English",
+            "1880"
+        ],
+        "type": "book",
+        "value": "106"
+    },
+    "000043": {
+        "details": [
+            "Gulliver's Travels",
+            "Jonathan Swift",
+            "Fantasy",
+            "English",
+            "1960"
+        ],
+        "type": "book",
+        "value": "108"
+    },
+    "000044": {
+        "details": [
+            "The Hobbit, or, There and Back Again",
+            "J.R.R. Tolkien",
+            "Fantasy",
+            "English",
+            "1983"
+        ],
+        "type": "book",
+        "value": "100"
+    },
+    "000045": {
+        "details": [
+            "The Return of the King",
+            "J.R.R. Tolkien",
+            "Fantasy",
+            "English",
+            "1990"
+        ],
+        "type": "book",
+        "value": "116"
+    },
+    "000046": {
+        "details": [
+            "The Wizard of Oz",
+            "L. Frank Baum",
+            "Fantasy",
+            "English",
+            "1950"
+        ],
+        "type": "book",
+        "value": "119"
+    },
+    "000047": {
+        "details": [
+            "The Wind in the Willows",
+            "Kenneth Grahame",
+            "Fantasy",
+            "English",
+            "2010"
+        ],
+        "type": "book",
+        "value": "78"
+    },
+    "000048": {
+        "details": [
+            "Harry Potter and the Sorcerer's Stone",
+            "J.K. Rowling",
+            "Fantasy",
+            "English",
+            "2009"
+        ],
+        "type": "book",
+        "value": "97"
+    },
+    "000049": {
+        "details": [
+            "The Lion, the Witch, and the Wardrobe",
+            "C.S. Lewis",
+            "Fantasy",
+            "English",
+            "1943"
+        ],
+        "type": "book",
+        "value": "94"
+    },
+    "000050": {
+        "details": [
+            "Peter Pan",
+            "J.M. Barrie",
+            "Fantasy",
+            "English",
+            "1854"
+        ],
+        "type": "book",
+        "value": "85"
+    },
+    "000051": {
+        "details": [
+            "Harry Potter and the Chamber of Secrets",
+            "J.K. Rowling",
+            "Fantasy",
+            "English",
+            "1890"
+        ],
+        "type": "book",
+        "value": "84"
+    },
+    "000052": {
+        "details": [
+            "Pride and Prejudice",
+            "Jane Austen",
+            "Romance",
+            "English",
+            "1880"
+        ],
+        "type": "book",
+        "value": "85"
+    },
+    "000053": {
+        "details": [
+            "Jane Eyre",
+            "Charlotte Bront\u00eb",
+            "Romance",
+            "English",
+            "1960"
+        ],
+        "type": "book",
+        "value": "119"
+    },
+    "000054": {
+        "details": [
+            "Anna Karenina",
+            "Leo Tolstoy",
+            "Romance",
+            "English",
+            "1983"
+        ],
+        "type": "book",
+        "value": "94"
+    },
+    "000055": {
+        "details": [
+            "Sense and Sensibility",
+            "Jane Austen",
+            "Romance",
+            "English",
+            "1990"
+        ],
+        "type": "book",
+        "value": "110"
+    },
+    "000056": {
+        "details": [
+            "Persuasion",
+            "Jane Austen",
+            "Romance",
+            "English",
+            "1950"
+        ],
+        "type": "book",
+        "value": "110"
+    },
+    "000057": {
+        "details": [
+            "Mansfield Park",
+            "Jane Austen",
+            "Romance",
+            "English",
+            "2010"
+        ],
+        "type": "book",
+        "value": "71"
+    },
+    "000058": {
+        "details": [
+            "Far from the Madding Crowd",
+            "Thomas Hardy",
+            "Romance",
+            "English",
+            "2009"
+        ],
+        "type": "book",
+        "value": "70"
+    },
+    "000059": {
+        "details": [
+            "The Return of the Native",
+            "Thomas Hardy",
+            "Romance",
+            "English",
+            "1943"
+        ],
+        "type": "book",
+        "value": "106"
+    },
+    "000060": {
+        "details": [
+            "Northanger Abbey",
+            "Jane Austen",
+            "Romance",
+            "English",
+            "1854"
+        ],
+        "type": "book",
+        "value": "97"
+    },
+    "000061": {
+        "details": [
+            "Love in the Time of Cholera",
+            "Gabriel Garc\u00eda M\u00e1rquez",
+            "Romance",
+            "English",
+            "1890"
+        ],
+        "type": "book",
+        "value": "94"
     }
 }
