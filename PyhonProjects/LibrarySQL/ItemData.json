@@ -681,28 +681,5 @@
         },
         "type": "book",
         "value": "94"
-    },
-    "000062": {
-        "details": {
-            "address": "w",
-            "family": "w",
-            "first": "w"
-        },
-        "location": "w",
-        "type": "customer",
-        "value": "w"
-    },
-    "000063": {
-        "details": {
-            "author": "w",
-            "class": "w",
-            "genre": "w",
-            "language": "w",
-            "publication year": "w",
-            "title": "w"
-        },
-        "location": "w",
-        "type": "book",
-        "value": "w"
     }
 }

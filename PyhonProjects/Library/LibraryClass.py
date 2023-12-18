@@ -1,6 +1,7 @@
 import json
 import functools
 import datetime
+from tabulate import tabulate
 
 class DataItem():
     """A class to define all attributes of a data item"""
@@ -56,82 +57,102 @@ class DataItem():
         self.average_val = str(round(average_val / count_item, round_digit))
         return self.average_val
                     
-    def display_list(self, item_type, sort_item = "", option = "", specific = ""):       
+    def display_list(self, item_list: dict, item_type:str, sort_item: str = "", option:str = "", specific:str = "") -> list:       
+        """Method for sorting a list of "item type" option to print table"""
+        # "sort item": by dict key. Default by first detail in self.duplicate list
+        # "option": "any" - no print, "print" - print tabulated table according to duplicate list in class header
         if sort_item == "":
-            sort_item = self.duplicate_list[item_type][0]
+            sort_item = self.duplicate_list[item_type]
         def myFunc(e):
             return e[sort_item]
-        display_item_list = []
+        display_item_list = [] # list of dict - to allow sort function
         sort_list = {}
-        item_list = []
-        short_list = ""
-        value_max_len = dict.fromkeys(self.duplicate_list[item_type], 0)
-        for i in self.item_data:
-            if specific:
-                if i != specific: 
-                    continue
-            if self.item_data[i]["type"] == item_type:
-                sort_list = {"ID": i}
-                item = self.item_data[i]["details"]
-                for key_index in item.keys():
-                    if key_index in value_max_len.keys():
-                        if len(item[key_index]) > value_max_len[key_index]:
-                            value_max_len[key_index] = len(item[key_index])                    
-                sort_list.update(item)
-                display_item_list.append(sort_list)
-        display_item_list.sort(key= myFunc)
-        for i in display_item_list:
-            short_list = "ID: " + str(i["ID"] + " ")
+        if specific:
+            i = specific
+            sort_list = {"ID": i}
+            item = item_list[i]["details"]                    
+            sort_list.update(item)
+            display_item_list.append(sort_list)    
+        else:
+            for i in item_list:
+                if item_list[i]["type"] == item_type:
+                    sort_list = {"ID": i}
+                    item = item_list[i]["details"]                    
+                    sort_list.update(item)
+                    display_item_list.append(sort_list)
+        display_item_list.sort(key= myFunc) # sorted list of dict
+        # tabulated table print module
+        
+        header = ["ID"]
+        header.extend(self.duplicate_list[item_type][0])
+        print_item_list = []
+        for i in display_item_list: # process each dict in list seperately
+            short_list = []
+            short_list.append(i["ID"])
             for n in i:
-                if n in self.duplicate_list[item_type]:
-                    item_lemgth = len(i[n])
-                    spacer = (value_max_len[n] - item_lemgth + 2) * " "
-                    short_list = short_list + str(n) + ": " + str(i[n]) + spacer
-            item_list.append(short_list)
-        self.item_list = item_list
+                 if n in self.duplicate_list[item_type]:
+                    short_list.append(i[n]) # collect relevant keys into list for each line in table
+            print_item_list.append(short_list) # list of lists for tabulate class
         if option == "print":
-            for i in self.item_list:
-                print(i)
-        return self.item_list
+            print(tabulate(print_item_list, headers= header))
+        self.header = header
+        self.print_item_list = print_item_list #list of list => printed items
+        return [self.print_item_list, header]
     
-    def find_item(self, item_type, choose= False):
+    def find_item(self, item_type, choose= False) -> list:
+        """ Method to search item in list by attributes and create a choice list as option"""
+        # analogy table of duct format and choice option
         options = {
             "book": 
-                (["id", "title", "author"], ["id", "title", "author"]),
+               [["ID", "TITLE", "AUTHOR"], ["ID", "title", "author"]],
             "customer":
-                (["id", "surename", "first name"], ["id", "family", "first"])
+                [["ID", "SURNAME", "FIRST NAME"], ["ID", "family", "first"]]
         }
         result = []
         search_loop = True
-        item_list = self.display_list(item_type)
+        # item_list = self.display_list(item_type)
         while search_loop:
-            search_list = []
-            empty = False
+            search_list = {}
             print("How would you like to search")
-            x = Storage.display_options(options[item_type][0])
-            what_to_search = input(f"Input what to search in {x[1]}: ")
-            # if what_to_search == "": what_to_search = " "
-            search_key = options[item_type][1][int(x[0])-1] + ":"
-            for index in item_list:
-                search_line = index.lower()
-                search_split = search_line.split()
-                search_string = search_split.index(search_key) + 1
-                if what_to_search in search_split[search_string]:
-                    search_list.append(index)
-            if (len(search_list)) == 0: empty = True
-            if choose:
-                search_list.append("retry?")
-                search_list.append("quit")
-                x = Storage.display_options(search_list)
-                if x[1].lower() == "retry?":
-                    search_loop = True
-                else:
-                    if empty:
-                        search_loop = False
-                        result = [False]
+            option_list = options[item_type][0]
+            x = Storage.display_options(option_list)
+            text_result = option_list[x]
+            what_to_search = input(f"Input what to search in {text_result.title()}: ") #any string in search attribute
+            
+            search_key = options[item_type][1][x]
+            for index in self.item_data:
+                if self.item_data[index]["type"] == item_type:
+                    if search_key == "ID":
+                        if what_to_search in index:
+                            search_list[index] = self.item_data[index]
                     else:
-                        search_loop = False
-                        result = x[1][4 : 4 + self.serial_length]
+                        if what_to_search in self.item_data[index]["details"][search_key]:
+                            search_list[index] = self.item_data[index]
+            choose_display = self.display_list(search_list, item_type)
+            
+            if not search_list: #if search list is empty
+                empty = True
+                print(f"No {item_type.upper()} found.")
+            if choose:
+                spacer = []
+                header = choose_display[1]
+                for  detail in header:
+                    spacer.append("")
+                display_list = choose_display[0]
+                display_list.append(["Retry"])
+                display_list.append(["Quit"])
+                
+                result = Storage.display_options(display_list, header)
+                print(result, display_list[result][0].lower())
+                if display_list[result][0].lower() == "retry":
+                    search_loop = True
+                elif display_list[result][0].lower() == "quit":
+                    search_loop = False
+                    print("Returning to main menu")
+                    result = []
+                else:
+                    search_loop = False
+                    result = {display_list[result][0]: search_list[display_list[result][0]]}
             else:
                 search_loop = False
                 result = search_list
@@ -221,9 +242,12 @@ class DataItem():
         details = item_info["details"]
         data = False
         duplicate = False
+        deleted = False
         serial = ""
         for i in self.item_data:
-            if self.item_data[i]["type"] == item_type:
+            if item_type in self.item_data[i]["type"] :
+                if "deleted" in self.item_data[i]["type"]:
+                    deleted = True
                 for check in self.duplicate_list[item_type]:
                     if self.item_data[i]["details"][check].lower() == details[check].lower():
                         duplicate = True
@@ -231,15 +255,24 @@ class DataItem():
                     else:
                         duplicate = False
         if duplicate:
-            print(f"""Found similar "{item_type.upper()}" item:""")
-            print(serial, self.item_data[serial])
-            print("What would you like to do?")
-            x = ["add new item", "abort"]
-            x = Storage.display_options(x)
-            choice = int(x[0])
-            if choice == 1:
-                data = False
+            if not deleted:
+                print(f"""Found similar "{item_type.upper()}" item:""")
+                print(tabulate([serial, self.item_data[serial]]))
+                print("What would you like to do?")
+                x = ["Add new item", "Abort"]
+                choice = Storage.display_options(x)
+                if choice == 1:
+                    data = False
+                else:
+                    data = True
             else:
+                print(f"""Found deleted "{item_type.upper()}" item:""")
+                print(tabulate([serial, self.item_data[serial]]))
+                print("What would you like to do?")
+                x = ["Restore", "Abort"]
+                choice = Storage.display_options(x)
+                if choice == 1:
+                    self.item_data[serial]["type"] = item_info["type"]
                 data = True
         return data
                     
@@ -247,12 +280,11 @@ class DataItem():
    
 class Storage():
     """A class to store all storage information"""
-    trans_info = ["time_stamp", "item"]
-    stock_info = ["quantity", "value"]
 
     transactions = "StorageData.json"
     stock = "StockData.json"
     serial_length = DataItem.serial_length
+    date_format = "%d-%m-%Y %X"
     
     def __init__(self):
         with open(self.stock, "r") as openfile:
@@ -263,44 +295,37 @@ class Storage():
     def print_data(self):
         print(self.stock_data)
     
-    # @staticmethod
-    # def item_format():
-    #     return Storage.trans_info
-    
     @classmethod
-    def display_options(cls, options:list, ending= "\n"): 
-        text_answer = ["", ""]        
+    def display_options(cls, options: any, header: list = []) -> int: 
+        if header:
+            header_addition = ["#"]
+            header_addition.extend(header)
+        i = 1
+        print_options = []
+        for item in options:
+            if type(item) == str:
+                item = [item]
+            line = [i]
+            line.extend(item)
+            print_options.append(line)
+            i += 1
         input_loop = True
         while input_loop:
-            i = 0
-            for choice in options:
-                options[i] = options[i].lower()
-                i += 1
-                print(str(i), end = ") ")
-                if i < len(options) :
-                    print(choice.title(), end= ending)
-                else:
-                    print(choice.title(), end= "")
-            
+            print(tabulate(print_options, headers= header))         
             my_choice = input(f"{"\n"}CHOICE? ")
-            if my_choice.lower() in options and my_choice != "":
-                text_answer[1] = my_choice
-                text_answer[0] = str(int(options.index(my_choice.lower()))+1)
-                input_loop = False
-            elif my_choice.isdigit():
-                if int(my_choice) > 0 and int(my_choice) <= i:
-                    text_answer[1] = options[int(my_choice) - 1]
-                    text_answer[0] = str(int(my_choice))
+            if my_choice.isdigit():
+                if int(my_choice) > 0 and int(my_choice) <= len(options):
+                    answer = int(my_choice) - 1
                     input_loop = False
             else:
                 print("Incorrect input. Try again.")
-        return text_answer    
+        return answer    
         
     def stock_info(self, item_id: str) -> dict:
+        """Check if item is in stock"""        
         stor_info = False
         if item_id in self.stock_data.keys():
-            stor_info = True               
-        self.store_info = stor_info
+            stor_info = True             
         return stor_info
     
     
@@ -338,7 +363,7 @@ class Storage():
             time_stamp = datetime.datetime.now()
             # register transactions in storage data file
             # time stamp is the identifier
-            time_stamp = time_stamp.strftime("%d-%m-%Y %X")
+            time_stamp = time_stamp.strftime(self.date_format)
             outgoing = {"serial": item_id, "storage": source, "quantity": -1 * quantity, "value": -1 * unit_source_value * quantity}
             ingoing = {"serial": item_id, "storage": dest, "quantity": quantity, "value": unit_source_value * quantity}
             transaction = {"output": outgoing, "input": ingoing}
@@ -348,7 +373,97 @@ class Storage():
             with open(self.transactions, 'w') as outfile:
                 json.dump(self.storage_data, outfile, sort_keys= True, indent= 4)
         
+    def last_transaction(self, loc: str, serial: str, in_out= "input") -> str:
+        """ method to get last transaction in specific location"""
+        # loc: location
+        # serial: item ID
+        # in_out: choose if to get incoming or outgoing transaction
+        trans_list = []
+        for i in self.storage_data:
+            x = self.storage_data[i][in_out]["storage"]
+            y = self.storage_data[i][in_out]["serial"]
+            if x == loc and y == serial:
+                trans_list.append(i)
+        if trans_list: # checking for error in data base due to project tests    
+            self.last = max(trans_list)
+        else:
+            self.last = datetime.datetime.now()
+            self.last = str(self.last.strftime("%d-%m-%Y %X"))
+        return self.last
+            
+    def item_stock(self, loc_type: str = "customer", item_type: str = "book") -> any:
+        """Method to list item status in storage"""  
+        # late: if only late loan information
         
+        item_list = DataItem() 
+        header_dict = DataItem.duplicate_list #print details from DataItem class
+        item_in_loc = {}
+        class_restrict = {1: 10, 2: 5, 3: 2}
+        # extracting data => item location as key and items in location as details
+        # this requires reversing the StockData file
+        for serial in self.stock_data:
+            loc_data = item_list.get_item(serial)
+            if loc_data["type"] == item_type:
+                loc_for_item = self.stock_data[serial].keys()
+                for location in loc_for_item:
+                    try: # check location exists 
+                        loc_data = item_list.get_item(location)
+                    except:
+                        continue
+                    if loc_data["type"] == loc_type:
+                        try:
+                            check = item_in_loc[location] # if there is already an item in location
+                            item_in_loc[location].append(serial) # collect stored item into storage item
+                        except:
+                            item_in_loc[location] = [serial] # for first instance of item in location
+        print(item_in_loc)
+        result = [] # output list
+        header = []
+        for item in item_in_loc: # creating list of lists for tabulate table
+            additional_line = [""]
+            for i in range(len(item_in_loc[item])):
+                line = [] # List in "result" for table
+                if i == 0: # if multiple items in location => location details will apear only in first line
+                    line.append(item)
+                    for n in header_dict[loc_type]: # location details from DataItem class
+                        line.append(item_list.get_item(item)["details"][n])
+                        additional_line.append("")
+                else: # empty string for all line except first
+                    line.extend(additional_line)
+                line.append(item_in_loc[item][i])
+                for n in header_dict[item_type]: # item details from DataItam class
+                    line.append(item_list.get_item(item_in_loc[item][i])["details"][n])
+                if item_type == "book":
+                    now_time = datetime.datetime.now()
+                    item_class = int(item_list.get_item(item_in_loc[item][i])["details"]["class"])
+                    max_days = class_restrict[item_class]
+                    time_stamp = self.last_transaction(item, item_in_loc[item][i])
+                    time_stamp = datetime.datetime.strptime(time_stamp, self.date_format)
+                    time_passed = int((now_time - time_stamp).days)
+                    if time_passed > max_days:
+                        loan_status = f"Overdue [{max_days} | {time_passed}]"
+                    else:
+                        loan_status = "" 
+                    # status1 = max_days
+                    # status2 = time_passed
+                    # line.append(status1)
+                    # line.append(status2)
+                    line.append(loan_status)                        
+                result.append(line)
+        # Creating header for tabulate table
+        header.append("ID")
+        header.extend(header_dict[loc_type])
+        header.append("ID")
+        header.extend(header_dict[item_type])
+        if item_type == "book":
+            # header.append("Max Days")
+            # header.append("Act. Days")
+            header.append("Status [M | A]")          
+        print("heade: ", header)  
+        print(tabulate(result, headers= header))
+                        
+            
+            
         
        
 
