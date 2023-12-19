@@ -35,7 +35,7 @@ def pick_options(pick: int, choice= [], option= []):
     return [x, y]
             
         
-    
+search_memory = ""    
 while True:   
     option = True 
     clear_screen()
@@ -55,6 +55,8 @@ while True:
             x = input(f"Would you like to add another {item}? (Y/N) ")
             if x.lower() != "y":
                 option = False
+    
+    
     
     choice_check = pick_options(choice, [3, 4], ["book", "book"])
     # 3 -> dest = customer, 4 -> dest = library
@@ -93,11 +95,13 @@ while True:
             x = input(f"Would you like to add another {item}? (Y/N)")
             if x.lower() != "y":
                 option = False    
+    
     choice_check = pick_options(choice, [5, 6], ["book", "customer"])
     if choice_check[0]:
         while option:
-            print(f"DISPLAYING ALL {choice_check[1].upper()}S: ")   
-            x = item_data.display_list(choice_check[1], "", "print")   
+            print(f"DISPLAYING ALL {choice_check[1].upper()}S: ")
+            x = item_data.get_item() 
+            y = item_data.display_list(x, choice_check[1], "", "print")   
             x = input("Continue? (Y/N) ")
             if x.lower() != "n":
                 option = False    
@@ -105,23 +109,63 @@ while True:
     choice_check = pick_options(choice, [7, 8], ["", ""])
     if choice_check[0]:
         while option:
-            print(f"{project_assignment[choice].upper()}: ")
-            if choice == "7":
-                storage.item_stock(False) 
-            else:
-                storage.item_stock(True) 
+            overdue = False
+            print(f"{project_assignment[choice - 1].upper()}: ")
+            if choice == 8:
+                overdue = True 
+            storage.item_stock(overdue)
             x = input("Continue? (Y/N) ")
-            if x.lower() != "n":
+            if x.lower() != "y":
+                option = False
+                
+    choice_check = pick_options(choice, [9, 10], ["book", "customer"])
+    if choice_check[0]:
+        while option:
+            print(choice_check[1])
+            print(f"FIND {choice_check[1].upper()} BY DETAIL")
+            print("Search will allow partial detail (even 1 letter or digit will suffice)")
+            search_memory = item_data.find_item(choice_check[1], True)
+            if search_memory:
+                search_memory = list(search_memory.keys())[0]
+            x = input("Continue? (Y/N) ")
+            if x.lower() != "y":
                 option = False
     
-    choice_check = pick_options(choice, [5, 6], ["book", "customer"])
+    choice_check = pick_options(choice, [11, 12], ["book", "customer"])
     if choice_check[0]:
-        while option:    
+        while option:
+            serial = ""
+            clear_screen()
+            if search_memory:
+                x = input(f" Would you like to use item number {search_memory} from last search? (Y/N) ")
+                if x.lower() == "y":
+                    serial = search_memory
+                else:
+                    serial = input(f"{project_assignment[choice - 1].upper()} with serial number: ")
+            else:
+                serial = input(f"{project_assignment[choice - 1].upper()} with serial number: ")            
+            serial = serial.zfill(lc.DataItem.serial_length)
+            print(serial)
+            try:
+                check_serial = item_data.get_item(serial)
+                if check_serial["type"] == choice_check[1]:
+                    delete_data = item_data.delete_item(serial)
+                    if delete_data:
+                        search_memory = list(delete_data.keys())[0]
+                else:
+                    print(f"{serial} is not of type {choice_check[1].upper()}")
+            except:
+                print(f"item {serial} does not exist")              
+            
+            x = input("Continue? (Y/N) ")
+            if x.lower() != "y":
+                option = False    
+            
             
         
-            x = input("Continue? (Y/N) ")
-            if x.lower() != "n":
-                option = False
+    #         x = input("Continue? (Y/N) ")
+    #         if x.lower() != "n":
+    #             option = False
             
 
 

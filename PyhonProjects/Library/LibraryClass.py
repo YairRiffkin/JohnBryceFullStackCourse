@@ -33,9 +33,12 @@ class DataItem():
         with open(self.file_name, 'w') as outfile:
             json.dump(new_dict, outfile, sort_keys= True, indent= 4)
         
-    def get_item(self, serial):
-        self.item = self.item_data[serial]
-        return self.item
+    def get_item(self, serial: str = "") -> dict:
+        if serial == "":
+            return self.item_data
+        else:
+            self.item = self.item_data[serial]
+            return self.item
         
     def next_serial(self) -> list:
         """Calculates current max. serial number and the next serial number one for new items"""
@@ -62,7 +65,7 @@ class DataItem():
         # "sort item": by dict key. Default by first detail in self.duplicate list
         # "option": "any" - no print, "print" - print tabulated table according to duplicate list in class header
         if sort_item == "":
-            sort_item = self.duplicate_list[item_type]
+            sort_item = self.duplicate_list[item_type][0]
         def myFunc(e):
             return e[sort_item]
         display_item_list = [] # list of dict - to allow sort function
@@ -84,7 +87,7 @@ class DataItem():
         # tabulated table print module
         
         header = ["ID"]
-        header.extend(self.duplicate_list[item_type][0])
+        header.extend(self.duplicate_list[item_type])
         print_item_list = []
         for i in display_item_list: # process each dict in list seperately
             short_list = []
@@ -143,7 +146,6 @@ class DataItem():
                 display_list.append(["Quit"])
                 
                 result = Storage.display_options(display_list, header)
-                print(result, display_list[result][0].lower())
                 if display_list[result][0].lower() == "retry":
                     search_loop = True
                 elif display_list[result][0].lower() == "quit":
@@ -197,7 +199,6 @@ class DataItem():
                 for detail in info_keys[key].keys():
                     data = "retry"
                     while data == "retry":
-                        ###############################################
                         data = input(f"{key} | {detail}: ")
                         if data == "": 
                             data = self.default(item_type, key, detail)
@@ -222,20 +223,18 @@ class DataItem():
             self.update_list(self.item_data)
     
     def delete_item(self, serial):
-        item = self.item_data[serial]
-        print(item)
-        print(item.keys())
-        print(f"Deleting item: {serial}{"\t"}Type: {self.item_data[serial]["type"]}")
-        for i in item["details"].keys():
-            # print(f"{i}")
-            print(f"{i}:{"\t"}{item["details"][i]}")
+        item = {serial: self.get_item(serial)}
+        item_type = item[serial]["type"]
+        print(f"Deleting item: {serial}{"\t"}Type: {item_type.title()}")
+        x = self.display_list(item, item_type, "", "print")
         x = input("Are you sure? (Y/N)? ")
         if x.lower() == "y":
             self.item_data[serial]["type"] = "deleted - " + self.item_data[serial]["type"].upper()
+            self.update_list(self.item_data) 
+            return(self.item_data)
         else:
             print("Aborting Delete")
-            exit()
-        self.update_list(self.item_data)  
+        
         
     def compare(self, item_info: dict):
         item_type = item_info["type"]
@@ -390,10 +389,10 @@ class Storage():
             self.last = datetime.datetime.now()
             self.last = str(self.last.strftime("%d-%m-%Y %X"))
         return self.last
-            
-    def item_stock(self, loc_type: str = "customer", item_type: str = "book") -> any:
+           
+    def item_stock(self, overdue: bool = False, loc_type: str = "customer", item_type: str = "book") -> any:
         """Method to list item status in storage"""  
-        # late: if only late loan information
+        # overdue -> prints only overdue books
         
         item_list = DataItem() 
         header_dict = DataItem.duplicate_list #print details from DataItem class
@@ -404,8 +403,18 @@ class Storage():
         for serial in self.stock_data:
             loc_data = item_list.get_item(serial)
             if loc_data["type"] == item_type:
+                
                 loc_for_item = self.stock_data[serial].keys()
                 for location in loc_for_item:
+                    if item_type == "book" and overdue:
+                        now_time = datetime.datetime.now()
+                        item_class = int(item_list.get_item(serial)["details"]["class"])
+                        max_days = class_restrict[item_class]
+                        time_stamp = self.last_transaction(location, serial)
+                        time_stamp = datetime.datetime.strptime(time_stamp, self.date_format)
+                        time_passed = int((now_time - time_stamp).days)
+                        if time_passed <= max_days:
+                            continue
                     try: # check location exists 
                         loc_data = item_list.get_item(location)
                     except:
@@ -416,7 +425,6 @@ class Storage():
                             item_in_loc[location].append(serial) # collect stored item into storage item
                         except:
                             item_in_loc[location] = [serial] # for first instance of item in location
-        print(item_in_loc)
         result = [] # output list
         header = []
         for item in item_in_loc: # creating list of lists for tabulate table
@@ -458,10 +466,9 @@ class Storage():
         if item_type == "book":
             # header.append("Max Days")
             # header.append("Act. Days")
-            header.append("Status [M | A]")          
-        print("heade: ", header)  
+            header.append("Status [M | A]")
         print(tabulate(result, headers= header))
-                        
+        return result                    
             
             
         
