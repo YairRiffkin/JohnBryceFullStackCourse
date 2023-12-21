@@ -1,7 +1,7 @@
 {
     "000001": {
         "details": {
-            "address": "Shivat Zion Street\u200e\u00a0 12, Haifa",
+            "address": "Shivat Zion Street 12, Haifa",
             "title": "City Library "
         },
         "location": "address",
@@ -19,7 +19,7 @@
     },
     "000003": {
         "details": {
-            "address": "Yefe Nof street\u200e\u00a0 9, Tirat Hacarmel ",
+            "address": "Yefe Nof street 9, Tirat Hacarmel ",
             "title": "City Library "
         },
         "location": "address",
@@ -58,7 +58,7 @@
     },
     "000007": {
         "details": {
-            "address": "Ha'Atzma'ut Street\u200e\u00a0 12/56,  Haifa",
+            "address": "Ha'Atzma'ut Street 12/56,  Haifa",
             "family": "Gallegos",
             "first": "Lucie"
         },
@@ -78,7 +78,7 @@
     },
     "000009": {
         "details": {
-            "address": "HaNadiv Avenue\u200e\u00a0 5/18,  Haifa",
+            "address": "HaNadiv Avenue 5/18,  Haifa",
             "family": "Klein",
             "first": "Kayleigh"
         },
@@ -88,7 +88,7 @@
     },
     "000010": {
         "details": {
-            "address": "HaNamal Street\u200e\u00a0 8/33,  Haifa",
+            "address": "HaNamal Street 8/33,  Haifa",
             "family": "Rosales",
             "first": "Haris"
         },
@@ -108,7 +108,7 @@
     },
     "000012": {
         "details": {
-            "address": "Hassan Shukri Street\u200e\u00a0 11/48,  Haifa",
+            "address": "Hassan Shukri Street 11/48,  Haifa",
             "family": "Crane",
             "first": "Carolyn"
         },
@@ -118,7 +118,7 @@
     },
     "000013": {
         "details": {
-            "address": "HaZevi Avenue\u200e\u00a0 13/41,  Haifa",
+            "address": "HaZevi Avenue 13/41,  Haifa",
             "family": "Goodman",
             "first": "Matteo"
         },
@@ -128,7 +128,7 @@
     },
     "000014": {
         "details": {
-            "address": "HaZiyonut Avenue\u200e\u00a0 9/15,  Haifa",
+            "address": "HaZiyonut Avenue 9/15,  Haifa",
             "family": "O'Brien",
             "first": "Anas"
         },
@@ -168,7 +168,7 @@
     },
     "000018": {
         "details": {
-            "address": "Yitzhak Avenue\u200e\u00a0 10/39, Haifa",
+            "address": "Yitzhak Avenue 10/39, Haifa",
             "family": "Le",
             "first": "Krishan"
         },
@@ -178,7 +178,7 @@
     },
     "000019": {
         "details": {
-            "address": "Louis Promenade\u200e\u00a0 4/58,  Haifa",
+            "address": "Louis Promenade 4/58,  Haifa",
             "family": "Carter",
             "first": "Cynthia"
         },
@@ -188,7 +188,7 @@
     },
     "000020": {
         "details": {
-            "address": "Maale Hashihrur Street\u200e\u00a0 3/60,  Haifa",
+            "address": "Maale Hashihrur Street 3/60,  Haifa",
             "family": "Barker",
             "first": "Woody"
         },
@@ -208,7 +208,7 @@
     },
     "000022": {
         "details": {
-            "address": "Nathanson Street\u200e\u00a0 3/38,  Haifa",
+            "address": "Nathanson Street 3/38,  Haifa",
             "family": "Bowers",
             "first": "Ruairi"
         },
@@ -235,6 +235,7 @@
             "publication year": "1983",
             "title": "Don Quixote"
         },
+        "location": "",
         "type": "book",
         "value": "80"
     },
@@ -247,6 +248,7 @@
             "publication year": "1990",
             "title": "The Adventures of Huckleberry Finn"
         },
+        "location": "",
         "type": "book",
         "value": "82"
     },
@@ -259,6 +261,7 @@
             "publication year": "1950",
             "title": "The Adventures of Tom Sawyer"
         },
+        "location": "",
         "type": "book",
         "value": "113"
     },
@@ -271,6 +274,7 @@
             "publication year": "2010",
             "title": "Treasure Island"
         },
+        "location": "",
         "type": "book",
         "value": "119"
     },
@@ -283,6 +287,7 @@
             "publication year": "2009",
             "title": "The Call of the Wild"
         },
+        "location": "",
         "type": "book",
         "value": "85"
     },
@@ -295,6 +300,7 @@
             "publication year": "1943",
             "title": "White Fang"
         },
+        "location": "",
         "type": "book",
         "value": "82"
     },
@@ -307,6 +313,7 @@
             "publication year": "1854",
             "title": "Kim"
         },
+        "location": "",
         "type": "book",
         "value": "114"
     },
@@ -319,6 +326,7 @@
             "publication year": "1890",
             "title": "Around the World in Eighty Days"
         },
+        "location": "",
         "type": "book",
         "value": "81"
     },
@@ -331,6 +339,7 @@
             "publication year": "1880",
             "title": "Robinson Crusoe"
         },
+        "location": "",
         "type": "book",
         "value": "78"
     },
@@ -343,6 +352,7 @@
             "publication year": "1960",
             "title": "Hatchet"
         },
+        "location": "",
         "type": "book",
         "value": "98"
     },
@@ -355,6 +365,7 @@
             "publication year": "1983",
             "title": "On the Road"
         },
+        "location": "",
         "type": "book",
         "value": "106"
     },
@@ -367,6 +378,7 @@
             "publication year": "1990",
             "title": "The Sorrows of Young Werther"
         },
+        "location": "",
         "type": "book",
         "value": "102"
     },
@@ -379,6 +391,7 @@
             "publication year": "1950",
             "title": "Remembrance of Things Past"
         },
+        "location": "",
         "type": "book",
         "value": "75"
     },
@@ -391,6 +404,7 @@
             "publication year": "2010",
             "title": "Little House on the Prairie"
         },
+        "location": "",
         "type": "book",
         "value": "95"
     },
@@ -403,6 +417,7 @@
             "publication year": "2009",
             "title": "Swann's Way"
         },
+        "location": "",
         "type": "book",
         "value": "100"
     },
@@ -415,6 +430,7 @@
             "publication year": "1943",
             "title": "On the Banks of Plum Creek"
         },
+        "location": "",
         "type": "book",
         "value": "105"
     },
@@ -427,6 +443,7 @@
             "publication year": "1854",
             "title": "The Long Winter"
         },
+        "location": "",
         "type": "book",
         "value": "103"
     },
@@ -439,6 +456,7 @@
             "publication year": "1890",
             "title": "By the Shores of Silver Lake"
         },
+        "location": "",
         "type": "book",
         "value": "96"
     },
@@ -451,6 +469,7 @@
             "publication year": "1880",
             "title": "Alice's Adventures in Wonderland"
         },
+        "location": "",
         "type": "book",
         "value": "106"
     },
@@ -463,6 +482,7 @@
             "publication year": "1960",
             "title": "Gulliver's Travels"
         },
+        "location": "",
         "type": "book",
         "value": "108"
     },
@@ -475,6 +495,7 @@
             "publication year": "1983",
             "title": "The Hobbit, or, There and Back Again"
         },
+        "location": "",
         "type": "book",
         "value": "100"
     },
@@ -487,6 +508,7 @@
             "publication year": "1990",
             "title": "The Return of the King"
         },
+        "location": "",
         "type": "book",
         "value": "116"
     },
@@ -499,6 +521,7 @@
             "publication year": "1950",
             "title": "The Wizard of Oz"
         },
+        "location": "",
         "type": "book",
         "value": "119"
     },
@@ -511,6 +534,7 @@
             "publication year": "2010",
             "title": "The Wind in the Willows"
         },
+        "location": "",
         "type": "book",
         "value": "78"
     },
@@ -523,6 +547,7 @@
             "publication year": "2009",
             "title": "Harry Potter and the Sorcerer's Stone"
         },
+        "location": "",
         "type": "book",
         "value": "97"
     },
@@ -535,6 +560,7 @@
             "publication year": "1943",
             "title": "The Lion, the Witch, and the Wardrobe"
         },
+        "location": "",
         "type": "book",
         "value": "94"
     },
@@ -547,6 +573,7 @@
             "publication year": "1854",
             "title": "Peter Pan"
         },
+        "location": "",
         "type": "book",
         "value": "85"
     },
@@ -559,6 +586,7 @@
             "publication year": "1890",
             "title": "Harry Potter and the Chamber of Secrets"
         },
+        "location": "",
         "type": "book",
         "value": "84"
     },
@@ -571,18 +599,20 @@
             "publication year": "1880",
             "title": "Pride and Prejudice"
         },
+        "location": "",
         "type": "book",
         "value": "85"
     },
     "000053": {
         "details": {
-            "author": "Charlotte Bront\u00eb",
+            "author": "Charlotte Bront",
             "class": "2",
             "genre": "Romance",
             "language": "English",
             "publication year": "1960",
             "title": "Jane Eyre"
         },
+        "location": "",
         "type": "book",
         "value": "119"
     },
@@ -595,6 +625,7 @@
             "publication year": "1983",
             "title": "Anna Karenina"
         },
+        "location": "",
         "type": "book",
         "value": "94"
     },
@@ -607,6 +638,7 @@
             "publication year": "1990",
             "title": "Sense and Sensibility"
         },
+        "location": "",
         "type": "book",
         "value": "110"
     },
@@ -619,6 +651,7 @@
             "publication year": "1950",
             "title": "Persuasion"
         },
+        "location": "",
         "type": "book",
         "value": "110"
     },
@@ -631,6 +664,7 @@
             "publication year": "2010",
             "title": "Mansfield Park"
         },
+        "location": "",
         "type": "book",
         "value": "71"
     },
@@ -643,6 +677,7 @@
             "publication year": "2009",
             "title": "Far from the Madding Crowd"
         },
+        "location": "",
         "type": "book",
         "value": "70"
     },
@@ -655,6 +690,7 @@
             "publication year": "1943",
             "title": "The Return of the Native"
         },
+        "location": "",
         "type": "book",
         "value": "106"
     },
@@ -667,18 +703,20 @@
             "publication year": "1854",
             "title": "Northanger Abbey"
         },
+        "location": "",
         "type": "book",
         "value": "97"
     },
     "000061": {
         "details": {
-            "author": "Gabriel Garc\u00eda M\u00e1rquez",
+            "author": "Gabriel Garcia Marquez",
             "class": "2",
             "genre": "Romance",
             "language": "English",
             "publication year": "1890",
             "title": "Love in the Time of Cholera"
         },
+        "location": "",
         "type": "book",
         "value": "94"
     },
@@ -701,8 +739,57 @@
             "publication year": "w",
             "title": "w"
         },
+        "location": "",
+        "type": "book",
+        "value": "w"
+    },
+    "000064": {
+        "details": {
+            "author": "Rudyard Kipling",
+            "class": "3",
+            "genre": "Action & Adventure",
+            "language": "English",
+            "publication year": "1854",
+            "title": "Kim"
+        },
+        "location": "",
+        "type": "deleted - BOOK",
+        "value": "114"
+    },
+    "000065": {
+        "details": {
+            "address": "a",
+            "family": "a",
+            "first": "a"
+        },
+        "location": "a",
+        "type": "customer",
+        "value": "a"
+    },
+    "000066": {
+        "details": {
+            "author": "w",
+            "class": "w",
+            "genre": "w",
+            "language": "w",
+            "publication year": "w",
+            "title": "w"
+        },
         "location": "w",
         "type": "book",
         "value": "w"
+    },
+    "000067": {
+        "details": {
+            "author": "w",
+            "class": "1",
+            "genre": "w",
+            "language": "w",
+            "publication year": "w",
+            "title": "w"
+        },
+        "location": "",
+        "type": "book",
+        "value": "75"
     }
 }

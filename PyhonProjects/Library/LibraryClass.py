@@ -7,21 +7,25 @@ class DataItem():
     """A class to define all attributes of a data item"""
     # Defining the structure of the data item.
     # This can be changed and there is a function that will update the old data to the updated format.
-    item_info = ["type", "details", "location", "value"]
+    
+    item_info = ["type", "details", "location", "value"] #essential item attributes
+    # deatils to be added per type to details attribute
     details_list = {
                 "book": ["title", "author", "genre", "language", "publication year", "class"],
                 "customer": ["family", "first", "address"],
                 "employee": [],
                 "library": ["title", "address"]
                 }
+    # Essentials to be compared when chscking for duplicates (also the headers for display item tables)
     duplicate_list = {
-                "book": ["title", "author"],
+                "book": ["author", "title"],
                 "customer": ["family", "first"],
                 "employee": ["family", "first"],
                 "library": ["address"]
                 }
     file_name = "ItemData.json"
     serial_length = 6
+    # restrictions on max. loan days for books
     class_restrict = {"1": 10, "2": 5, "3": 2}
     
     def __init__(self):
@@ -34,6 +38,7 @@ class DataItem():
             json.dump(new_dict, outfile, sort_keys= True, indent= 4)
         
     def get_item(self, serial: str = "") -> dict:
+        """ Get specific item details from item ID"""
         if serial == "":
             return self.item_data
         else:
@@ -41,7 +46,7 @@ class DataItem():
             return self.item
         
     def next_serial(self) -> list:
-        """Calculates current max. serial number and the next serial number one for new items"""
+        """Returns max. serial number & next serial for new item"""
         serial_list = self.item_data.keys()
         self.max_serial = max(serial_list)
         self.next_ser = str(int(self.max_serial) + 1).zfill(self.serial_length)
@@ -60,32 +65,34 @@ class DataItem():
         self.average_val = str(round(average_val / count_item, round_digit))
         return self.average_val
                     
-    def display_list(self, item_list: dict, item_type:str, sort_item: str = "", option:str = "", specific:str = "") -> list:       
+    def display_list(self, item_list: dict, item_type:str, sort_item: str = "", option:str = "", deleted: bool = False) -> list:       
         """Method for sorting a list of "item type" option to print table"""
+        # "item list": dict to be displayed
+        # "item type": type of item for header display
         # "sort item": by dict key. Default by first detail in self.duplicate list
         # "option": "any" - no print, "print" - print tabulated table according to duplicate list in class header
+        # "deleted": allows display of deleted item with the initial type
         if sort_item == "":
-            sort_item = self.duplicate_list[item_type][0]
+            sort_item = self.duplicate_list[item_type][0] # if no sort is chosen sort is by first detail in details
         def myFunc(e):
             return e[sort_item]
         display_item_list = [] # list of dict - to allow sort function
         sort_list = {}
-        if specific:
-            i = specific
-            sort_list = {"ID": i}
-            item = item_list[i]["details"]                    
-            sort_list.update(item)
-            display_item_list.append(sort_list)    
-        else:
-            for i in item_list:
-                if item_list[i]["type"] == item_type:
+        for i in item_list:
+            if deleted:
+                if item_type.lower() in item_list[i]["type"].lower(): #"in" operator instead of "=="
                     sort_list = {"ID": i}
-                    item = item_list[i]["details"]                    
-                    sort_list.update(item)
+                    details = item_list[i]["details"]                    
+                    sort_list.update(details)
                     display_item_list.append(sort_list)
-        display_item_list.sort(key= myFunc) # sorted list of dict
+            else:
+                if item_type == item_list[i]["type"]:
+                    sort_list = {"ID": i}
+                    details = item_list[i]["details"]                    
+                    sort_list.update(details)
+                    display_item_list.append(sort_list)
+        # display_item_list.sort(key= myFunc) # sorted list of dict
         # tabulated table print module
-        
         header = ["ID"]
         header.extend(self.duplicate_list[item_type])
         print_item_list = []
@@ -102,9 +109,10 @@ class DataItem():
         self.print_item_list = print_item_list #list of list => printed items
         return [self.print_item_list, header]
     
-    def find_item(self, item_type, choose= False) -> list:
+    def find_item(self, item_type: str, choose: bool = False) -> list:
         """ Method to search item in list by attributes and create a choice list as option"""
-        # analogy table of duct format and choice option
+        # analogy table of dict format and choice option
+        # "choose" allows choice from list
         options = {
             "book": 
                [["ID", "TITLE", "AUTHOR"], ["ID", "title", "author"]],
@@ -116,7 +124,7 @@ class DataItem():
         # item_list = self.display_list(item_type)
         while search_loop:
             search_list = {}
-            print("How would you like to search")
+            print("How would you like to search") #attribute to search by
             option_list = options[item_type][0]
             x = Storage.display_options(option_list)
             text_result = option_list[x]
@@ -173,7 +181,7 @@ class DataItem():
             if item_key == "location": data = ""
             elif item_key == "value": data = self.average_value("book")
             elif item_key == "details":
-                if details == "class": data = str(self.class_restrict["1"])
+                if details == "class": data = "1"
                 else: data = "retry"
         else:
             pass
@@ -188,7 +196,6 @@ class DataItem():
         item_list = {}
         info_keys = dict.fromkeys(DataItem.item_info)
         info_keys["details"] = dict.fromkeys(DataItem.details_list[item_type])
-        # info_keys["type"] = item_type
         print(f"Starting item number: {serial} | of type: {item_type} =>")
         for key in info_keys.keys():
             if key == "type":
@@ -200,7 +207,11 @@ class DataItem():
                     data = "retry"
                     while data == "retry":
                         data = input(f"{key} | {detail}: ")
-                        if data == "": 
+                        if detail == "class":
+                            if data not in ("1", "2", "3"):
+                                print("Must be 1, 2 or 3")
+                                data = "retry"
+                        if data == "":
                             data = self.default(item_type, key, detail)
                             if data == "retry": 
                                 print("Sorry, data is compulsory")
@@ -210,19 +221,41 @@ class DataItem():
                 data = "retry"
                 while data == "retry":
                     data = input(f"{key}: ")
+                    if key == "value":
+                        try:
+                            try_value = float(data)
+                        except:
+                            if data == "": continue
+                            else:
+                                print("number is required")
+                                data = "retry"
                     if data == "": 
                         data = self.default(item_type, key, detail)
                         if data == "retry": 
                             print("Sorry, data is compulsory")
                 item_list.update({key: data})
         duplicate = self.compare(item_list)
-        if duplicate:
-            print("Aborting new item")
-        else:
-            self.item_data[serial] = item_list
-            self.update_list(self.item_data)
+        found_item = {}
+        if duplicate[0]: # type: ignore
+            found = "similar"
+            option = "Add new item"
+            if duplicate[1]:  # type: ignore
+                found = "deleted"
+                option = "Restore"
+            print(f"""Found {found} "{item_type.upper()}" item:""")
+            found_item[duplicate[2]] = self.item_data[duplicate[2]] # type: ignore
+            d = self.display_list(found_item, item_type, "", "print", duplicate[1])
+            print("What would you like to do?")
+            x = [option, "Abort"]
+            choice = Storage.display_options(x) + 1
+            if choice == 1:
+                self.item_data[serial] = item_list
+                self.update_list(self.item_data)
+            else:
+                print("Aborting new item")
     
-    def delete_item(self, serial):
+    def delete_item(self, serial: str) -> None:
+        """Delete item by changing type to "delete" + cureent type"""
         item = {serial: self.get_item(serial)}
         item_type = item[serial]["type"]
         print(f"Deleting item: {serial}{"\t"}Type: {item_type.title()}")
@@ -236,16 +269,20 @@ class DataItem():
             print("Aborting Delete")
         
         
-    def compare(self, item_info: dict):
+    def compare(self, item_info: dict) -> any:
+        """Check if item already exists"""
+        #Check by details defined in "duplicate_list" in class header
         item_type = item_info["type"]
         details = item_info["details"]
         data = False
         duplicate = False
         deleted = False
         serial = ""
+        found_item = {}
         for i in self.item_data:
-            if item_type in self.item_data[i]["type"] :
-                if "deleted" in self.item_data[i]["type"]:
+            compared_type = self.item_data[i]["type"]
+            if item_type.lower() in compared_type.lower():
+                if "deleted" in compared_type:
                     deleted = True
                 for check in self.duplicate_list[item_type]:
                     if self.item_data[i]["details"][check].lower() == details[check].lower():
@@ -253,27 +290,7 @@ class DataItem():
                         serial = i.zfill(self.serial_length)
                     else:
                         duplicate = False
-        if duplicate:
-            if not deleted:
-                print(f"""Found similar "{item_type.upper()}" item:""")
-                print(tabulate([serial, self.item_data[serial]]))
-                print("What would you like to do?")
-                x = ["Add new item", "Abort"]
-                choice = Storage.display_options(x)
-                if choice == 1:
-                    data = False
-                else:
-                    data = True
-            else:
-                print(f"""Found deleted "{item_type.upper()}" item:""")
-                print(tabulate([serial, self.item_data[serial]]))
-                print("What would you like to do?")
-                x = ["Restore", "Abort"]
-                choice = Storage.display_options(x)
-                if choice == 1:
-                    self.item_data[serial]["type"] = item_info["type"]
-                data = True
-        return data
+        return [duplicate, deleted, serial] # type: ignore
                     
                     
    
@@ -341,16 +358,16 @@ class Storage():
             else:
                 possible = False
                 print("Item does not exist in source")
+        if possible: 
             unit_source_value = value
             source_value = unit_source_value * source_quantity
-        try:
-            dest_quantity = float(self.stock_data[item_id][dest][0])
-            dest_value = float(self.stock_data[item_id][dest][1])
-        except:
-            dest_quantity = float(0)
-            dest_value = float(0)      
-        
-        if possible:           
+            try:
+                dest_quantity = float(self.stock_data[item_id][dest][0])
+                dest_value = float(self.stock_data[item_id][dest][1])
+            except:
+                dest_quantity = float(0)
+                dest_value = float(0)      
+              
             source_quantity = source_quantity - quantity # Deduct transfer from source
             source_value = source_value - unit_source_value * quantity        
             
@@ -406,6 +423,7 @@ class Storage():
                 
                 loc_for_item = self.stock_data[serial].keys()
                 for location in loc_for_item:
+                    print(location)
                     if item_type == "book" and overdue:
                         now_time = datetime.datetime.now()
                         item_class = int(item_list.get_item(serial)["details"]["class"])
@@ -417,14 +435,14 @@ class Storage():
                             continue
                     try: # check location exists 
                         loc_data = item_list.get_item(location)
+                        if loc_data["type"] == loc_type:
+                            try:
+                                check = item_in_loc[location] # if there is already an item in location
+                                item_in_loc[location].append(serial) # collect stored item into storage item
+                            except:
+                                item_in_loc[location] = [serial] # for first instance of item in location
                     except:
                         continue
-                    if loc_data["type"] == loc_type:
-                        try:
-                            check = item_in_loc[location] # if there is already an item in location
-                            item_in_loc[location].append(serial) # collect stored item into storage item
-                        except:
-                            item_in_loc[location] = [serial] # for first instance of item in location
         result = [] # output list
         header = []
         for item in item_in_loc: # creating list of lists for tabulate table

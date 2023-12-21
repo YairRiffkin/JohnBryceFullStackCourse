@@ -26,25 +26,37 @@ def clear_screen():
     os.system('cls')
 
 def pick_options(pick: int, choice= [], option= []):
-    x = False
-    y = []
+    """Checking user input Return list - digit (choice) and str (item type)"""
+    choice_check = False
+    item_choice = []
     for i in zip(choice, option):
         if pick == i[0]:
-            x = True
-            y = i[1]
-    return [x, y]
+            choice_check = True
+            item_choice = i[1]
+    return [choice_check, item_choice]
+
+def end_check(input_string: str = "Repeat?") -> bool:
+    # question in string should direct answer "Y" to repeat last function. Other => return to menu
+    option = True
+    answer = input(input_string + " (Y/N) ")
+    if answer.lower() != "y":
+        option = False
+    return option
             
-        
-search_memory = ""    
-while True:   
+
+                   
+search_memory = "" #remebers search choice for other use  
+continue_user = True 
+
+while continue_user:   #main user interface to choose action
     option = True 
     clear_screen()
     print("OPTIONS MENU: ")
     print("=================")
-    # print_list = list(enumerate(project_assignment, 1))
     choice = lc.Storage.display_options(project_assignment) + 1
     clear_screen()
 
+    # input new item. same method for all items
     choice_check = pick_options(choice, [1, 2], ["customer", "book"])
     if choice_check[0]:
         item = choice_check[1]
@@ -52,14 +64,12 @@ while True:
             clear_screen() 
             print(f"ADD A NEW {item.upper()}", "\n")
             item_data.new_item(item)
-            x = input(f"Would you like to add another {item}? (Y/N) ")
-            if x.lower() != "y":
-                option = False
+            option = end_check(f"Would you like to add another {item}?")
     
     
-    
+    # loan or return a book. Both are the same transaction with opposite directionality
+    # 3(loan) -> dest = customer, 4(return) -> dest = library
     choice_check = pick_options(choice, [3, 4], ["book", "book"])
-    # 3 -> dest = customer, 4 -> dest = library
     if choice_check[0]:
         while option: 
             print("[LOAN] or [RETURN] A BOOK")
@@ -92,32 +102,30 @@ while True:
                 item_value = item_data.get_item(book_id)
                 value = float(item_value["value"])
                 storage.transaction(book_id, source, dest, 1, value)
-            x = input(f"Would you like to add another {item}? (Y/N)")
-            if x.lower() != "y":
-                option = False    
+            option = end_check(f"Would you like to add another {item}?")
     
+    # Display item (works for both book or cutomer depending on choice)
     choice_check = pick_options(choice, [5, 6], ["book", "customer"])
     if choice_check[0]:
         while option:
             print(f"DISPLAYING ALL {choice_check[1].upper()}S: ")
-            x = item_data.get_item() 
+            x = item_data.get_item() #choose total item list file
             y = item_data.display_list(x, choice_check[1], "", "print")   
-            x = input("Continue? (Y/N) ")
-            if x.lower() != "n":
-                option = False    
+            option = end_check()
                 
+    # display loan list. all or only overdue -> depends on choice
     choice_check = pick_options(choice, [7, 8], ["", ""])
     if choice_check[0]:
         while option:
-            overdue = False
+            overdue = False #default is full list
             print(f"{project_assignment[choice - 1].upper()}: ")
             if choice == 8:
-                overdue = True 
+                overdue = True #only overdue loans
             storage.item_stock(overdue)
-            x = input("Continue? (Y/N) ")
-            if x.lower() != "y":
-                option = False
+            option = end_check()
                 
+    #find any item. Item type depends on choice.
+    #item Id chosen will remain in "search_memory"
     choice_check = pick_options(choice, [9, 10], ["book", "customer"])
     if choice_check[0]:
         while option:
@@ -127,10 +135,10 @@ while True:
             search_memory = item_data.find_item(choice_check[1], True)
             if search_memory:
                 search_memory = list(search_memory.keys())[0]
-            x = input("Continue? (Y/N) ")
-            if x.lower() != "y":
-                option = False
+            x = input()
     
+    #Delete items item type depends on choice
+    #Item is not deleted but type is changed to "deleted" + old type
     choice_check = pick_options(choice, [11, 12], ["book", "customer"])
     if choice_check[0]:
         while option:
@@ -157,16 +165,16 @@ while True:
             except:
                 print(f"item {serial} does not exist")              
             
-            x = input("Continue? (Y/N) ")
-            if x.lower() != "y":
-                option = False    
+            option = end_check()  
             
             
+    choice_check = pick_options(choice, [13], [" "])
+    if choice_check[0]:
+        x = input("Aborting program. Are you sure? (Y/N) ")
+        y = input(f"{x.lower()}")
+        if x.lower == "y":
+            break
         
-    #         x = input("Continue? (Y/N) ")
-    #         if x.lower() != "n":
-    #             option = False
-            
 
 
 
