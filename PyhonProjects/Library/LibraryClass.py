@@ -274,22 +274,20 @@ class DataItem():
         #Check by details defined in "duplicate_list" in class header
         item_type = item_info["type"]
         details = item_info["details"]
-        data = False
         duplicate = False
         deleted = False
         serial = ""
-        found_item = {}
         for i in self.item_data:
             compared_type = self.item_data[i]["type"]
             if item_type.lower() in compared_type.lower():
-                if "deleted" in compared_type:
-                    deleted = True
+                
                 for check in self.duplicate_list[item_type]:
                     if self.item_data[i]["details"][check].lower() == details[check].lower():
                         duplicate = True
+                        print(duplicate)
                         serial = i.zfill(self.serial_length)
-                    else:
-                        duplicate = False
+                        if "deleted" in compared_type:
+                            deleted = True
         return [duplicate, deleted, serial] # type: ignore
                     
                     
