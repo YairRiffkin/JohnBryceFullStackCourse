@@ -1,0 +1,548 @@
+{
+    "12-12-2023 01:55:02": {
+        "input": {
+            "quantity": 1,
+            "serial": "000026",
+            "storage": "000001",
+            "value": 113.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000026",
+            "storage": "",
+            "value": -113.0
+        }
+    },
+    "12-12-2023 01:55:24": {
+        "input": {
+            "quantity": 1,
+            "serial": "000025",
+            "storage": "000001",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000025",
+            "storage": "",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 01:01:13": {
+        "input": {
+            "quantity": 1,
+            "serial": "000050",
+            "storage": "000020",
+            "value": 85.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000050",
+            "storage": "000001",
+            "value": -85.0
+        }
+    },
+    "13-12-2023 01:15:15": {
+        "input": {
+            "quantity": 1,
+            "serial": "000029",
+            "storage": "000018",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000029",
+            "storage": "000001",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 01:17:16": {
+        "input": {
+            "quantity": 1,
+            "serial": "000029",
+            "storage": "000001",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000029",
+            "storage": "000018",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:12:37": {
+        "input": {
+            "quantity": 1,
+            "serial": "000024",
+            "storage": "000004",
+            "value": 80.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000024",
+            "storage": "000001",
+            "value": -80.0
+        }
+    },
+    "13-12-2023 03:12:47": {
+        "input": {
+            "quantity": 1,
+            "serial": "000025",
+            "storage": "000005",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000025",
+            "storage": "000001",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:12:57": {
+        "input": {
+            "quantity": 1,
+            "serial": "000026",
+            "storage": "000006",
+            "value": 113.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000026",
+            "storage": "000001",
+            "value": -113.0
+        }
+    },
+    "13-12-2023 03:13:07": {
+        "input": {
+            "quantity": 1,
+            "serial": "000027",
+            "storage": "000007",
+            "value": 119.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000027",
+            "storage": "000001",
+            "value": -119.0
+        }
+    },
+    "13-12-2023 03:13:17": {
+        "input": {
+            "quantity": 1,
+            "serial": "000028",
+            "storage": "000008",
+            "value": 85.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000028",
+            "storage": "000001",
+            "value": -85.0
+        }
+    },
+    "13-12-2023 03:13:27": {
+        "input": {
+            "quantity": 1,
+            "serial": "000029",
+            "storage": "000009",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000029",
+            "storage": "000001",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:13:37": {
+        "input": {
+            "quantity": 1,
+            "serial": "000030",
+            "storage": "000010",
+            "value": 114.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000030",
+            "storage": "000001",
+            "value": -114.0
+        }
+    },
+    "13-12-2023 03:13:47": {
+        "input": {
+            "quantity": 1,
+            "serial": "000031",
+            "storage": "000011",
+            "value": 81.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000031",
+            "storage": "000001",
+            "value": -81.0
+        }
+    },
+    "13-12-2023 03:13:57": {
+        "input": {
+            "quantity": 1,
+            "serial": "000032",
+            "storage": "000012",
+            "value": 78.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000032",
+            "storage": "000001",
+            "value": -78.0
+        }
+    },
+    "13-12-2023 03:14:07": {
+        "input": {
+            "quantity": 1,
+            "serial": "000033",
+            "storage": "000013",
+            "value": 98.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000033",
+            "storage": "000001",
+            "value": -98.0
+        }
+    },
+    "13-12-2023 03:15:06": {
+        "input": {
+            "quantity": 1,
+            "serial": "000024",
+            "storage": "000001",
+            "value": 80.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000024",
+            "storage": "000004",
+            "value": -80.0
+        }
+    },
+    "13-12-2023 03:15:16": {
+        "input": {
+            "quantity": 1,
+            "serial": "000025",
+            "storage": "000001",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000025",
+            "storage": "000005",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:15:26": {
+        "input": {
+            "quantity": 1,
+            "serial": "000026",
+            "storage": "000001",
+            "value": 113.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000026",
+            "storage": "000006",
+            "value": -113.0
+        }
+    },
+    "13-12-2023 03:15:36": {
+        "input": {
+            "quantity": 1,
+            "serial": "000027",
+            "storage": "000001",
+            "value": 119.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000027",
+            "storage": "000007",
+            "value": -119.0
+        }
+    },
+    "13-12-2023 03:15:46": {
+        "input": {
+            "quantity": 1,
+            "serial": "000028",
+            "storage": "000001",
+            "value": 85.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000028",
+            "storage": "000008",
+            "value": -85.0
+        }
+    },
+    "13-12-2023 03:15:56": {
+        "input": {
+            "quantity": 1,
+            "serial": "000029",
+            "storage": "000001",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000029",
+            "storage": "000009",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:16:06": {
+        "input": {
+            "quantity": 1,
+            "serial": "000030",
+            "storage": "000001",
+            "value": 114.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000030",
+            "storage": "000010",
+            "value": -114.0
+        }
+    },
+    "13-12-2023 03:16:16": {
+        "input": {
+            "quantity": 1,
+            "serial": "000031",
+            "storage": "000001",
+            "value": 81.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000031",
+            "storage": "000011",
+            "value": -81.0
+        }
+    },
+    "13-12-2023 03:16:26": {
+        "input": {
+            "quantity": 1,
+            "serial": "000032",
+            "storage": "000001",
+            "value": 78.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000032",
+            "storage": "000012",
+            "value": -78.0
+        }
+    },
+    "13-12-2023 03:16:36": {
+        "input": {
+            "quantity": 1,
+            "serial": "000033",
+            "storage": "000001",
+            "value": 98.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000033",
+            "storage": "000013",
+            "value": -98.0
+        }
+    },
+    "13-12-2023 03:17:13": {
+        "input": {
+            "quantity": 1,
+            "serial": "000024",
+            "storage": "000004",
+            "value": 80.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000024",
+            "storage": "000001",
+            "value": -80.0
+        }
+    },
+    "13-12-2023 03:17:23": {
+        "input": {
+            "quantity": 1,
+            "serial": "000025",
+            "storage": "000005",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000025",
+            "storage": "000001",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:17:33": {
+        "input": {
+            "quantity": 1,
+            "serial": "000026",
+            "storage": "000006",
+            "value": 113.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000026",
+            "storage": "000001",
+            "value": -113.0
+        }
+    },
+    "13-12-2023 03:17:43": {
+        "input": {
+            "quantity": 1,
+            "serial": "000027",
+            "storage": "000007",
+            "value": 119.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000027",
+            "storage": "000001",
+            "value": -119.0
+        }
+    },
+    "13-12-2023 03:17:53": {
+        "input": {
+            "quantity": 1,
+            "serial": "000028",
+            "storage": "000008",
+            "value": 85.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000028",
+            "storage": "000001",
+            "value": -85.0
+        }
+    },
+    "13-12-2023 03:18:03": {
+        "input": {
+            "quantity": 1,
+            "serial": "000029",
+            "storage": "000009",
+            "value": 82.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000029",
+            "storage": "000001",
+            "value": -82.0
+        }
+    },
+    "13-12-2023 03:18:13": {
+        "input": {
+            "quantity": 1,
+            "serial": "000030",
+            "storage": "000010",
+            "value": 114.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000030",
+            "storage": "000001",
+            "value": -114.0
+        }
+    },
+    "13-12-2023 03:18:23": {
+        "input": {
+            "quantity": 1,
+            "serial": "000031",
+            "storage": "000011",
+            "value": 81.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000031",
+            "storage": "000001",
+            "value": -81.0
+        }
+    },
+    "13-12-2023 03:18:33": {
+        "input": {
+            "quantity": 1,
+            "serial": "000032",
+            "storage": "000012",
+            "value": 78.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000032",
+            "storage": "000001",
+            "value": -78.0
+        }
+    },
+    "13-12-2023 03:18:43": {
+        "input": {
+            "quantity": 1,
+            "serial": "000033",
+            "storage": "000013",
+            "value": 98.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000033",
+            "storage": "000001",
+            "value": -98.0
+        }
+    },
+    "13-12-2023 11:07:28": {
+        "input": {
+            "quantity": 1,
+            "serial": "000038",
+            "storage": "000013",
+            "value": 100.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000038",
+            "storage": "000001",
+            "value": -100.0
+        }
+    },
+    "18-12-2023 18:56:15": {
+        "input": {
+            "quantity": 1,
+            "serial": "000047",
+            "storage": "000012",
+            "value": 78.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000047",
+            "storage": "000001",
+            "value": -78.0
+        }
+    },
+    "18-12-2023 18:57:57": {
+        "input": {
+            "quantity": 1,
+            "serial": "000047",
+            "storage": "000001",
+            "value": 78.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000047",
+            "storage": "000012",
+            "value": -78.0
+        }
+    },
+    "20-12-2023 00:46:16": {
+        "input": {
+            "quantity": 1,
+            "serial": "000035",
+            "storage": "000015",
+            "value": 102.0
+        },
+        "output": {
+            "quantity": -1,
+            "serial": "000035",
+            "storage": "000001",
+            "value": -102.0
+        }
+    }
+}

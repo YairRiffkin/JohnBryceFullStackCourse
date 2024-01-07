@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block page_content %}
+<h1>Login -- Page</h1>
+{% for message in get_flashed_messages{category_filter={"error"}} %}
+<p class="error">{{ message }}</p>
+{% endfor %}
+<form method="post">
+    <input type="text" placeholder="Username" required id="username" name="username">
+    <input type="password" placeholder="Password" required id="password" name="password">
+    <input type="submit">
+</form>
+{% endblock %}
